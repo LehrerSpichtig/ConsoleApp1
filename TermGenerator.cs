@@ -49,11 +49,38 @@ public class TermGenerator
         List<string> Symbols = symbols.ToList<string>();
         List<int> Levels = levels.ToList<int>();
         List<double> FloatValues = floatValues.ToList<double>();
-
+/*
+        int z = 0;
+        bool consecutives = false;
+        while (z < Levels.Count){
+            if (Levels[z] == currentLevel && z+4 < Levels.Count && Levels[z+4] == currentLevel){
+                if (Levels[z+2] == currentLevel){
+                    Levels[z] = currentLevel+1;
+                    Levels[z+2] = currentLevel+1;                    
+                }
+                
+                consecutives = true;
+                int u = z+4;
+                while (u+2 < Levels.Count && Levels[u+2] == currentLevel){
+                    u+=2;
+                }             
+                z = u;
+            }
+            else {
+                z+=2;
+            }
+        }
+        if (consecutives){
+            currentLevel +=1;
+        }
+*/
 
         int i = 0;
         List<int> Update = [];
-        while (i < Levels.Count)
+        bool oneHandled = false;
+        List<string> strich = ["+","-"];
+        List<string> punkt =  ["*","/"];
+        while (i < Levels.Count & !oneHandled)
         {
             if (Levels[i] == currentLevel)
             {
@@ -62,24 +89,30 @@ public class TermGenerator
                 {
                     case "+":
                         FloatValues[i] = FloatValues[i] + FloatValues[i + 2];
+                        oneHandled =true;
                         break;
                     case "-":
                         FloatValues[i] = FloatValues[i] - FloatValues[i + 2];
+                        oneHandled =true;
                         break;
                     case "*":
                         FloatValues[i] = FloatValues[i] * FloatValues[i + 2];
+                        oneHandled =true;
                         break;
                     case "/":
                         FloatValues[i] = FloatValues[i] / FloatValues[i + 2];
+                        oneHandled =true;
                         break;
                     case "^":
                         FloatValues[i] = Math.Pow(FloatValues[i], FloatValues[i + 2]);
+                        oneHandled =true;
                         break;
                 }
                 //FloatValues[i] = Math.Round(FloatValues[i], 1);
                 Symbols[i] = Math.Round(FloatValues[i], 1).ToString();
                 //Levels[i] = Levels[i]-1;            
                 i += 3;
+
             }
             else
             {
@@ -90,6 +123,7 @@ public class TermGenerator
 
         for (int j = Update.Count - 1; j >= 0; j--)
         {
+            string operation = Symbols[Update[j]+1];
             Symbols.RemoveAt(Update[j] + 2);
             Symbols.RemoveAt(Update[j] + 1);
             FloatValues.RemoveAt(Update[j] + 2);
@@ -97,10 +131,20 @@ public class TermGenerator
             Levels[Update[j]] -= 1;
             Levels.RemoveAt(Update[j] + 2);
             Levels.RemoveAt(Update[j] + 1);
+            if (strich.Contains(operation) && Update[j]+1<Symbols.Count && strich.Contains(Symbols[Update[j]+1]) && Levels[Update[j]+1]==Levels[Update[j]]){
+                Levels[Update[j]] += 1;
+            }
+            if (punkt.Contains(operation) && Update[j]+1<Symbols.Count && punkt.Contains(Symbols[Update[j]+1]) && Levels[Update[j]+1]==Levels[Update[j]]){
+                Levels[Update[j]] += 1;
+            }
+
         }
 
         //UNBEDINGT "this" anfügen!!
-        this.currentLevel -= 1;
+        if (!Levels.Contains(currentLevel)){
+            this.currentLevel -= 1;
+        }
+        
         this.symbols = Symbols.ToArray();
         this.floatValues = FloatValues.ToArray();
         this.levels = Levels.ToArray();

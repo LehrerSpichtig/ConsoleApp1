@@ -12,3 +12,4 @@ C:\Users\mspic\OneDrive - sluz\aaaaaSJ23_24\VR_AR\ConsoleApp1\obj\Debug\net8.0\r
 C:\Users\mspic\OneDrive - sluz\aaaaaSJ23_24\VR_AR\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.pdb
 C:\Users\mspic\OneDrive - sluz\aaaaaSJ23_24\VR_AR\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.genruntimeconfig.cache
 C:\Users\mspic\OneDrive - sluz\aaaaaSJ23_24\VR_AR\ConsoleApp1\obj\Debug\net8.0\ref\ConsoleApp1.dll
+C:\Users\mspic\OneDrive - sluz\aaaaaSJ23_24\VR_AR\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.sourcelink.json
