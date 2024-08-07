@@ -49,31 +49,8 @@ public class TermGenerator
         List<string> Symbols = symbols.ToList<string>();
         List<int> Levels = levels.ToList<int>();
         List<double> FloatValues = floatValues.ToList<double>();
-/*
-        int z = 0;
-        bool consecutives = false;
-        while (z < Levels.Count){
-            if (Levels[z] == currentLevel && z+4 < Levels.Count && Levels[z+4] == currentLevel){
-                if (Levels[z+2] == currentLevel){
-                    Levels[z] = currentLevel+1;
-                    Levels[z+2] = currentLevel+1;                    
-                }
-                
-                consecutives = true;
-                int u = z+4;
-                while (u+2 < Levels.Count && Levels[u+2] == currentLevel){
-                    u+=2;
-                }             
-                z = u;
-            }
-            else {
-                z+=2;
-            }
-        }
-        if (consecutives){
-            currentLevel +=1;
-        }
-*/
+
+        
 
         int i = 0;
         List<int> Update = [];

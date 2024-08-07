@@ -52,7 +52,7 @@ b.SingleLoop();
 stringData = "10 1 + 0 2 2 * 1 3 2 + 0 3 1";
 b.FirstLoop(stringData);
 b.SingleLoop();
-stringData = "10 1 + 0 2 1";
+stringData = "10 1 + 0 2 2 * 1 3 2 + 0 4 1 + 0 4 2 * 1 2 2";
 b.FirstLoop(stringData);
 b.SingleLoop();
 
