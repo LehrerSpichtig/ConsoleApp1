@@ -49,6 +49,12 @@ b.FirstLoop(stringData);
 b.SingleLoop();
 b.FirstLoop(a.measuredTerm(a.LatexToExpressiontree(@"\frac{2.0+2.1*3.21}{4.1+5}+{{{3.5}^{5.6}}}^{2}}")));
 b.SingleLoop();
+stringData = "10 1 + 0 2 2 * 1 3 2 + 0 3 1";
+b.FirstLoop(stringData);
+b.SingleLoop();
+stringData = "10 1 + 0 2 1";
+b.FirstLoop(stringData);
+b.SingleLoop();
 
     
     
