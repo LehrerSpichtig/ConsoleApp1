@@ -50,13 +50,13 @@ public class TermGenerator
         List<int> Levels = levels.ToList<int>();
         List<double> FloatValues = floatValues.ToList<double>();
 
-        
+
 
         int i = 0;
         List<int> Update = [];
         bool oneHandled = false;
-        List<string> strich = ["+","-"];
-        List<string> punkt =  ["*","/"];
+        List<string> strich = ["+", "-"];
+        List<string> punkt = ["*", "/"];
         while (i < Levels.Count & !oneHandled)
         {
             if (Levels[i] == currentLevel)
@@ -66,23 +66,23 @@ public class TermGenerator
                 {
                     case "+":
                         FloatValues[i] = FloatValues[i] + FloatValues[i + 2];
-                        oneHandled =true;
+                        oneHandled = true;
                         break;
                     case "-":
                         FloatValues[i] = FloatValues[i] - FloatValues[i + 2];
-                        oneHandled =true;
+                        oneHandled = true;
                         break;
                     case "*":
                         FloatValues[i] = FloatValues[i] * FloatValues[i + 2];
-                        oneHandled =true;
+                        oneHandled = true;
                         break;
                     case "/":
                         FloatValues[i] = FloatValues[i] / FloatValues[i + 2];
-                        oneHandled =true;
+                        oneHandled = true;
                         break;
                     case "^":
                         FloatValues[i] = Math.Pow(FloatValues[i], FloatValues[i + 2]);
-                        oneHandled =true;
+                        oneHandled = true;
                         break;
                 }
                 //FloatValues[i] = Math.Round(FloatValues[i], 1);
@@ -100,7 +100,7 @@ public class TermGenerator
 
         for (int j = Update.Count - 1; j >= 0; j--)
         {
-            string operation = Symbols[Update[j]+1];
+            string operation = Symbols[Update[j] + 1];
             Symbols.RemoveAt(Update[j] + 2);
             Symbols.RemoveAt(Update[j] + 1);
             FloatValues.RemoveAt(Update[j] + 2);
@@ -108,24 +108,66 @@ public class TermGenerator
             Levels[Update[j]] -= 1;
             Levels.RemoveAt(Update[j] + 2);
             Levels.RemoveAt(Update[j] + 1);
-            if (strich.Contains(operation) && Update[j]+1<Symbols.Count && strich.Contains(Symbols[Update[j]+1]) && Levels[Update[j]+1]==Levels[Update[j]]){
+            if (strich.Contains(operation) && Update[j] + 1 < Symbols.Count && strich.Contains(Symbols[Update[j] + 1]) && Levels[Update[j] + 1] == Levels[Update[j]])
+            {
                 Levels[Update[j]] += 1;
             }
-            if (punkt.Contains(operation) && Update[j]+1<Symbols.Count && punkt.Contains(Symbols[Update[j]+1]) && Levels[Update[j]+1]==Levels[Update[j]]){
+            if (punkt.Contains(operation) && Update[j] + 1 < Symbols.Count && punkt.Contains(Symbols[Update[j] + 1]) && Levels[Update[j] + 1] == Levels[Update[j]])
+            {
                 Levels[Update[j]] += 1;
             }
 
         }
 
         //UNBEDINGT "this" anfügen!!
-        if (!Levels.Contains(currentLevel)){
+        if (!Levels.Contains(currentLevel))
+        {
             this.currentLevel -= 1;
         }
-        
+
         this.symbols = Symbols.ToArray();
         this.floatValues = FloatValues.ToArray();
         this.levels = Levels.ToArray();
 
+    }
+
+    public List<int> PrimFaktorzerlegung(int n)
+    {
+        List<int> tM = new();
+
+        if (n == 1) return tM;
+        int t = 2;
+        while (t * t <= n)
+        {
+            while (n % t == 0)
+            {
+                tM.Add(t);
+                n /= t;
+            }
+            t++;
+        }
+        tM.Add(n);
+        return tM;
+    }
+
+    public List<int> TeilerMenge(int n){
+        List<int> tM = new();
+
+        if (n == 1) return tM;
+        int t = 2;
+        while (t * t <= n)
+        {
+            if (n % t == 0)
+            {
+                tM.Add(t);
+                tM.Add((n/t));
+            }
+            t++;
+        }
+        //tM.Add(n);
+        tM.Sort();
+        
+        return tM;
     }
 
     public void FirstLoop(string stringData)

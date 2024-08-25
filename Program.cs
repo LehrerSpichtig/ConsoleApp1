@@ -56,6 +56,11 @@ stringData = "10 1 + 0 2 2 * 1 3 2 + 0 4 1 + 0 4 2 * 1 2 2";
 b.FirstLoop(stringData);
 b.SingleLoop();
 
+Console.WriteLine();
+Console.WriteLine();
+List<int> pf = b.TeilerMenge(36);
+foreach (int p in pf) Console.Write(p  + " ");
+Console.WriteLine();
     
     
 
